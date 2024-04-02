@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import logging
-from waveshare_epd import epd2in13_V2
+from waveshare_epd import epd2in13_V3
 from PIL import Image,ImageDraw,ImageFont
 import speedtest
 import time
@@ -9,28 +9,32 @@ import time
 logging.basicConfig(level=logging.DEBUG)
 
 def main():
+    # Initialize the e-ink display
+    epd = epd2in13_V3.EPD()
+    logging.info("Initiating e-ink display")
     
-    epd = epd2in13_V2.EPD()
-    logging.info("init")
-    epd.init(epd.FULL_UPDATE)
-
-    logging.info("get the speedtest results") 
+    
+    # Get the speedtest results
     s = speedtest.Speedtest()
     s.get_best_server()
     bw_down = s.download()
     bw_up = s.upload()
     results_dict = s.results.dict()
-    ping = (results_dict['ping'])
-    
-    image = Image.new('1', (epd2in13_V2.EPD_HEIGHT,epd2in13_V2.EPD_WIDTH), 255)  
+    ping = results_dict['ping']
+    logging.info("Aquired the Speedtest Results")
+
+    # Create an image
+    image = Image.new('1', (epd2in13_V3.EPD_HEIGHT,epd2in13_V3.EPD_WIDTH), 255)  
     draw = ImageDraw.Draw(image)
 
+    # Load fonts
     font = ImageFont.truetype('fonts/Roboto-Thin.ttf', 14)
     font2 = ImageFont.truetype('fonts/DroidSans.ttf', 24)
     font3 = ImageFont.truetype('fonts/Roboto-Light.ttf', 10)
     font4 = ImageFont.truetype('fonts/Roboto-Thin.ttf', 10)
     font5 = ImageFont.truetype('fonts/Verdana_Bold.ttf', 20)
 
+    # Draw on the image
     draw.rectangle((0, 0, 250, 40), fill = 0)
     draw.text((5, 10), 'Bandwidth PiMonitor', font = font5, fill = 255)
 
@@ -53,7 +57,9 @@ def main():
     current_time = time.strftime("%H:%M:%S, %d.%m.%Y")
     draw.text((6, 110), 'tested @' + current_time, font=font3)
 
-    logging.info("clear and display the results")
+    # Clear and display the results
+    logging.info("Clearing and displaying the results")
+    epd.init()
     epd.Clear(0xFF)
     epd.display(epd.getbuffer(image.rotate(180,expand=True)))
     epd.sleep()
