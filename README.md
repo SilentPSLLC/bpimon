@@ -27,7 +27,7 @@ cd bpimon
 
 #Install required dependancies
 pip install -r requirements.txt (COMING SOON)
-
+```bash
 
 ## Usage
 python bpimon.py
