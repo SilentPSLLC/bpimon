@@ -39,7 +39,7 @@ python bpimon.py
 
 
 ## Contributors
-- @zangaby
+- @zangaby (OriginalDeveloper...share some love to this guy. Withouthim this fork would not exist)
 - @SilentPSLLC
 
 
