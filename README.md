@@ -20,14 +20,14 @@ This Bandwidth monitor will fetch internet speed metrics including download/uplo
 
 
 ## Installation
-```bash
+
 #Clone This Repository
 git clone https://github.com/SilentPSLLC/bpimon.git
 cd bpimon
 
 #Install required dependancies
 pip install -r requirements.txt (COMING SOON)
-```bash
+
 
 ## Usage
 python bpimon.py
