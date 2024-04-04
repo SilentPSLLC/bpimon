@@ -21,16 +21,17 @@ This Bandwidth monitor will fetch internet speed metrics including download/uplo
 
 ## Installation
 
-#Clone This Repository
-git clone https://github.com/SilentPSLLC/bpimon.git
-cd bpimon
+Step 1: Install dependancies: 
+sudo apt install git wget python3-pip python3-pil python3-numpy gcc-10-base krb5-locales libc6 libcom-err2 libcrypt1 libgcc-s1 libgssapi-krb5-2 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libnsl2 libnss-nis libnss-nisplus libssl1.1 libtirpc3 libunistring2
 
-#Install required dependancies
-pip install -r requirements.txt (COMING SOON)
+Step 2: Install Additional Dependancies: sudo pip3 install RPi.GPIO spidev speedtest-cli
 
+Step 3: Install WiringPi Libararies: wget https://project-downloads.drogon.net/wiringpi-latest.deb && sudo dpkg -i wiringpi-latest.deb
+
+Step 4: Clone This Repository: git clone https://github.com/SilentPSLLC/bpimon && mv bpimon /opt/bpimon
 
 ## Usage
-python bpimon.py
+Inside the /opt/bpimon fodler run (cd /opt/bpimon):  sudo python3 bpimon.py
 
 
 ## Notes
